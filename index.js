@@ -7,16 +7,9 @@ MongoClient.connect(mongoURI, { useNewUrlParser: true }, (err, db) => {
   if (err) throw err;
   let dbo = db.db('nodejs_mongodb_crud');
 
-  // let query = { address: 'Park Lane 38'};
-  // dbo.collection("customers").find(query).toArray(function(err, result) {
-  //   if (err) throw err;
-  //   console.log(result);
-  //   db.close();
-  // });
-
-  // filter with regular expression
-  let query = { address: /^S/ };
-  dbo.collection("customers").find(query).toArray(function(err, result) {
+  // sort by name ASC (1 => ASC, -1 => DESC)
+  let mysort = { name: -1 };
+  dbo.collection("customers").find().sort(mysort).toArray(function(err, result) {
     if (err) throw err;
     console.log(result);
     db.close();
